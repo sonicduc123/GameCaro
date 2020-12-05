@@ -129,19 +129,20 @@
 
             <TableRow>
               <LinearLayout android:layout_gravity="center_horizontal" >
+
                   <Button
                       android:id="@+id/btnTwoPlayer"
                       android:layout_width="wrap_content"
-                      android:background="@drawable/custom_btn"
-                      android:layout_marginTop="10dp"
+                      android:layout_height="50dp"
                       android:layout_marginLeft="20dp"
+                      android:layout_marginTop="10dp"
                       android:layout_marginRight="20dp"
                       android:layout_marginBottom="20dp"
-                      android:textColor="@color/colorWhite"
-                      android:textStyle="italic|bold"
+                      android:background="@drawable/custom_btn"
                       android:paddingHorizontal="20dp"
-                      android:layout_height="50dp"
-                      android:text="2 PLAYERS" />
+                      android:text="2 PLAYERS"
+                      android:textColor="@color/colorWhite"
+                      android:textStyle="italic|bold" />
               </LinearLayout>
                <LinearLayout
                    android:layout_gravity="center_horizontal"

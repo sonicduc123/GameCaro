@@ -23,9 +23,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -103,14 +106,15 @@ public class RoomActivity extends Activity {
 
     boolean check = true;
     boolean check1 = true;
-    boolean isUnregister = true;
-
     ArrayList<BluetoothDevice> listDevice = new ArrayList<BluetoothDevice>();
     ListView listView;
     ArrayList<String> deviceName = new ArrayList<String>();
     AdapterListView adapter;
-    Button btnRefresh, btnCreate;
-    TextView txtWait;
+    Button btnCreate;
+    ImageButton btnRefresh;
+    TextView txtWait, txt3;
+    LottieAnimationView lottieAnimationView;
+
 
     private BluetoothAdapter BA;
 
@@ -125,10 +129,13 @@ public class RoomActivity extends Activity {
 
         listView = (ListView)findViewById(R.id.listRoom);
 
-        btnRefresh = (Button)findViewById(R.id.btnRefresh);
+        btnRefresh = (ImageButton)findViewById(R.id.btnRefresh);
         btnCreate = (Button)findViewById(R.id.btnCreateRoom);
 
+        txt3 = (TextView)findViewById(R.id.textView3);
         txtWait= (TextView)findViewById(R.id.txtWait);
+
+        lottieAnimationView = (LottieAnimationView) findViewById(R.id.cat);
 
         handleBluetooth();
 
@@ -137,18 +144,20 @@ public class RoomActivity extends Activity {
             public void onClick(View v) {
                 Log.e("sdfsf","loi o day neddddd thg ngu 1");
 
-                if (!isUnregister) {
+                if (!deviceName.isEmpty()) {
                     Log.e("sdfsf","loi o day neddddd thg ngu 2");
 
                     deviceName.clear();
                     listDevice.clear();
                     BA.cancelDiscovery();
                     unregisterReceiver(receiver);
-                    isUnregister = true;
                 }
                 Log.e("sdfsf","loi o day neddddd thg ngu 3");
 
+                txt3.setVisibility(View.GONE);
                 listView.setVisibility(View.GONE);
+                lottieAnimationView.setVisibility(View.VISIBLE);
+                lottieAnimationView.playAnimation();
                 txtWait.setText("WAITING...");
                 txtWait.setVisibility(View.VISIBLE);
                 serverThread = new Server(hMain);
@@ -228,21 +237,17 @@ public class RoomActivity extends Activity {
 
     public  void getRoom(View v) {
         check = true;
-        if (!isUnregister) {
-            unregisterReceiver(receiver);
-            BA.cancelDiscovery();
-            isUnregister = true;
-        }
+        deviceName.clear();
+        listDevice.clear();
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
         BA.startDiscovery();
-        isUnregister = false;
-
-        deviceName.clear();
-        listDevice.clear();
 
         txtWait.setVisibility(View.GONE);
+        txt3.setVisibility(View.GONE);
+        lottieAnimationView.pauseAnimation();
+        lottieAnimationView.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
     }
 
@@ -271,17 +276,14 @@ public class RoomActivity extends Activity {
             btnJoin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!isUnregister) {
-                        listDevice.clear();
-                        deviceName.clear();
-                        BA.cancelDiscovery();
-                        unregisterReceiver(receiver);
-                        isUnregister = true;
-                    }
+                    BA.cancelDiscovery();
+                    unregisterReceiver(receiver);
 
                     listView.setVisibility(View.GONE);
                     txtWait.setText("WAITING...");
                     txtWait.setVisibility(View.VISIBLE);
+                    lottieAnimationView.setVisibility(View.VISIBLE);
+                    lottieAnimationView.playAnimation();
                     check1 = true;
                     clientThread = new Client(listDevice.get(position), hMain);
                     clientThread.start();
