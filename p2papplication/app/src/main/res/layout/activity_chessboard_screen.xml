@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ChessboardScreenActivity">
+
+    <LinearLayout
+        android:id="@+id/layoutBoard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background5"
+        android:orientation="vertical"
+        tools:context=".ChessboardScreenActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:paddingTop="10dp"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/editText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif-monospace"
+                        android:padding="5dp"
+                        android:text="PLAYER 1: DAT1"
+                        android:layout_marginBottom="8dp"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progress1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:progressDrawable="@drawable/custom_progress"
+                        android:layout_height="6dp"
+                        android:scaleY="3" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/text_view_countdown"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="00:00"
+                    android:textSize="18sp"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/editText3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="serif-monospace"
+                        android:padding="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="PLAYER 1: DAT2"
+                        android:textColor="@color/colorWhite"
+                        android:textStyle="bold" />
+
+                    <ProgressBar
+                        android:id="@+id/progress2"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:progressDrawable="@drawable/custom_progress"
+                        android:scaleY="3" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+           >
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout"
+                    android:layout_width="600dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <GridView
+                        android:id="@+id/gridView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:columnWidth="40dp"
+                        android:numColumns="auto_fit"
+                        android:scrollbars="horizontal"
+                        android:stretchMode="none"></GridView>
+
+
+                </LinearLayout>
+            </FrameLayout>
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                android:weightSum="1.0">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.18"
+                    android:background="@drawable/custom_shadow_button"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btnBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_baseline_image_24"
+                        android:backgroundTint="@color/colorWhite"
+                        android:outlineSpotShadowColor="@color/colorRed"
+                        android:textColor="@color/colorGreen" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.19"
+                    android:background="@drawable/custom_shadow_button"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btnMusic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_baseline_music_note_24"
+                        android:backgroundTint="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:background="@drawable/custom_shadow_button"
+                    android:layout_weight="0.19"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btnRedo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_baseline_redo_24"
+                        android:backgroundTint="@color/colorWhite" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="0.18"
+                    android:background="@drawable/custom_shadow_button"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/btnHome"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/ic_baseline_home_24"
+                        android:backgroundTint="@color/colorWhite" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.05" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>
+
+

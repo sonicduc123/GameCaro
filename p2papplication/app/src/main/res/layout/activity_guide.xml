@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:paddingVertical="20dp"
+    android:background="@drawable/background"
+    android:layout_height="match_parent"
+    >
+
+    <TextView android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:textColor="#000000"
+        android:textStyle="italic|bold"
+        android:textSize="50dp"
+        android:text="GUIDE" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_weight="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:text="- A game is started when there are 2 players on the board. \n\n - Who is entitled to go first: play anywhere on the board \n\n- When it is your turn: the player must tick a box on the board . Tick ​​all 5 boxes vertically, horizontally or diagonally without being blocked by the first 2 to win. \n\n- Each player has 20 seconds to go. After 20 seconds the player who does not tick the box will lose the game. "
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="italic" />
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_height="wrap_content"
+        android:text="BACK"
+        android:padding="15dp"/>
+</LinearLayout>
