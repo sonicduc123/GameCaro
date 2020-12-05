@@ -31,7 +31,6 @@ import android.widget.Toast;
 import com.airbnb.lottie.LottieAnimationView;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class RoomActivity extends Activity {
     static final int CLIENT = 1;
@@ -106,6 +105,8 @@ public class RoomActivity extends Activity {
 
     boolean check = true;
     boolean check1 = true;
+    boolean isUnregister = true;
+
     ArrayList<BluetoothDevice> listDevice = new ArrayList<BluetoothDevice>();
     ListView listView;
     ArrayList<String> deviceName = new ArrayList<String>();
@@ -143,15 +144,16 @@ public class RoomActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Log.e("sdfsf","loi o day neddddd thg ngu 1");
-
-                if (!deviceName.isEmpty()) {
+                if (!isUnregister) {
                     Log.e("sdfsf","loi o day neddddd thg ngu 2");
 
                     deviceName.clear();
                     listDevice.clear();
                     BA.cancelDiscovery();
                     unregisterReceiver(receiver);
+                    isUnregister = true;
                 }
+
                 Log.e("sdfsf","loi o day neddddd thg ngu 3");
 
                 txt3.setVisibility(View.GONE);
@@ -237,12 +239,19 @@ public class RoomActivity extends Activity {
 
     public  void getRoom(View v) {
         check = true;
+        if (!isUnregister) {
+            unregisterReceiver(receiver);
+            BA.cancelDiscovery();
+            isUnregister = true;
+        }
+
         deviceName.clear();
         listDevice.clear();
 
         IntentFilter filter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver, filter);
         BA.startDiscovery();
+        isUnregister = false;
 
         txtWait.setVisibility(View.GONE);
         txt3.setVisibility(View.GONE);
@@ -276,8 +285,11 @@ public class RoomActivity extends Activity {
             btnJoin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BA.cancelDiscovery();
-                    unregisterReceiver(receiver);
+                    if (!isUnregister) {
+                        BA.cancelDiscovery();
+                        unregisterReceiver(receiver);
+                        isUnregister = true;
+                    }
 
                     listView.setVisibility(View.GONE);
                     txtWait.setText("WAITING...");
@@ -287,6 +299,8 @@ public class RoomActivity extends Activity {
                     check1 = true;
                     clientThread = new Client(listDevice.get(position), hMain);
                     clientThread.start();
+                    listDevice.clear();
+                    deviceName.clear();
                 }
             });
 
