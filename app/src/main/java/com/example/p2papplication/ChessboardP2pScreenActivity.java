@@ -143,7 +143,7 @@ public class ChessboardP2pScreenActivity extends Activity {
                         //yeu cau gui position
                         globalVar++;
                         check = false;
-                        Toast.makeText(ChessboardP2pScreenActivity.this, " " + list[position / col][position % col], Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ChessboardP2pScreenActivity.this, " " + list[position / col][position % col], Toast.LENGTH_LONG).show();
 
                         myHandler.post(p2);
                     }
@@ -158,7 +158,7 @@ public class ChessboardP2pScreenActivity extends Activity {
                             customTextView.setBackgroundResource(R.drawable.x);
                             list[position / col][position % col] = 1;//x danh tai day
                         }
-                        Toast.makeText(ChessboardP2pScreenActivity.this, " " +list[position / col][position % col], Toast.LENGTH_LONG).show();
+                        //Toast.makeText(ChessboardP2pScreenActivity.this, " " +list[position / col][position % col], Toast.LENGTH_LONG).show();
 
                         globalVar++;
                     }}else {

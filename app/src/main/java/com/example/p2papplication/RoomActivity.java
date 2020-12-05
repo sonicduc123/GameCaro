@@ -229,9 +229,9 @@ public class RoomActivity extends Activity {
         if (!BA.isEnabled()) {
             Intent turnOn = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(turnOn, REQUEST_ENABLE_BLUETOOTH);
-            Toast.makeText(getApplicationContext(), "Turned on",Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Turned on",Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Already on", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Already on", Toast.LENGTH_LONG).show();
         }
 
         //change name of bluetooth device
