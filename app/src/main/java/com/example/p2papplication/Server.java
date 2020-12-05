@@ -83,7 +83,7 @@ public class Server extends Thread{
 
     public void sendMsg(int pos){
         String str = Integer.toString(pos);
-        ((P2p) sToc).write(str.getBytes());
+        ((P2p) sToc).write(str.getBytes(), true);
     }
 
     // Closes the connect socket and causes the thread to finish.

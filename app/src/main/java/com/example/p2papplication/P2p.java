@@ -2,6 +2,7 @@ package com.example.p2papplication;
 
 import android.bluetooth.BluetoothSocket;
 import android.os.Handler;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,6 +13,7 @@ public class P2p extends Thread{
     Handler hP2p;
     InputStream In;
     OutputStream Out;
+    boolean isPosition = false;
 
     public P2p(BluetoothSocket socket, Handler h)
     {
@@ -41,15 +43,23 @@ public class P2p extends Thread{
         while (true){
             try{
                 bytes = In.read(buffer);
-                hP2p.obtainMessage(3, bytes,-1, buffer).sendToTarget();
+                if (isPosition) {
+                    hP2p.obtainMessage(3, bytes,-1, buffer).sendToTarget();
+                }
+                else {
+                    hP2p.obtainMessage(4, bytes,-1, buffer).sendToTarget();
+                    isPosition = true;
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void write(byte[] bytes)
+    public void write(byte[] bytes, boolean isPos)
     {
+        isPosition = isPos;
         try{
             Out.write(bytes);
         } catch (IOException e) {

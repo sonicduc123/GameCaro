@@ -64,7 +64,12 @@ public class Client extends Thread{
     }
     public void sendMsg(int i){
         String str = Integer.toString(i);
-        ((P2p) cTos).write(str.getBytes());
+
+        ((P2p) cTos).write(str.getBytes(), true);
+    }
+
+    public void sendNamePlayer(String namePlayer) {
+        ((P2p) cTos).write(namePlayer.getBytes(), false);
     }
 
     // Closes the client socket and causes the thread to finish.

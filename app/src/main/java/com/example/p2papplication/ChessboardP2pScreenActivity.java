@@ -41,6 +41,8 @@ public class ChessboardP2pScreenActivity extends Activity {
     int value, intClient;
     boolean check = true;
 
+    TextView namePlayer;
+    TextView namePlayer2;
 
     Button btnMusic;
     Button btnRedo;
@@ -76,6 +78,12 @@ public class ChessboardP2pScreenActivity extends Activity {
         gridView = findViewById(R.id.gridView);
         progressBar1 = findViewById(R.id.progress1);
         progressBar2 = findViewById(R.id.progress2);
+
+        namePlayer = (TextView) findViewById(R.id.namePlayer);
+        namePlayer.setText("Player1: " + MainActivity.namePlayer);
+
+        namePlayer2 = (TextView) findViewById(R.id.namePlayer2);
+        namePlayer2.setText("Player2: " + RoomActivity.namePlayer2.substring(3));
 
         btnBackground = (Button) findViewById(R.id.btnBackground);
         btnHome = (Button) findViewById(R.id.btnHome);
@@ -127,8 +135,9 @@ public class ChessboardP2pScreenActivity extends Activity {
 
                         Log.e("me","P1: " + position + " " + value);
 
-                        if(intClient == 0)
+                        if(intClient == 0) {
                             ((Client) RoomActivity.clientThread).sendMsg(position);
+                        }
                         else
                             ((Server) RoomActivity.serverThread).sendMsg(position);
                         //yeu cau gui position

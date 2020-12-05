@@ -29,13 +29,13 @@
     <ImageButton
         android:id="@+id/btnRefresh"
         android:layout_width="48dp"
-        android:layout_height="31dp"
+        android:layout_height="48dp"
         android:layout_below="@+id/textView"
         android:layout_marginStart="61dp"
         android:layout_marginTop="-16dp"
         android:layout_marginBottom="6dp"
         android:layout_toEndOf="@+id/textView"
-        android:background="@drawable/custom_btn"
+        android:background="@drawable/ic_baseline_refresh_24"
         android:text="Button" />
 
     <LinearLayout
@@ -118,6 +118,7 @@
         android:id="@+id/btnCreateRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"

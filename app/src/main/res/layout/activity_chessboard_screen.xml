@@ -34,12 +34,12 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/editText2"
+                        android:id="@+id/namePlayer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="serif-monospace"
                         android:padding="5dp"
-                        android:text="PLAYER 1: DAT1"
+                        android:text="PLAYER1: YOU"
                         android:layout_marginBottom="8dp"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold" />
@@ -72,13 +72,13 @@
                     android:padding="10dp">
 
                     <TextView
-                        android:id="@+id/editText3"
+                        android:id="@+id/namePlayer2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="serif-monospace"
                         android:padding="5dp"
                         android:layout_marginBottom="8dp"
-                        android:text="PLAYER 1: DAT2"
+                        android:text="PLAYER2: COMPUTER"
                         android:textColor="@color/colorWhite"
                         android:textStyle="bold" />
 

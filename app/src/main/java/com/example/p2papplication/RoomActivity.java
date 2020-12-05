@@ -36,9 +36,12 @@ public class RoomActivity extends Activity {
     static final int CLIENT = 1;
     static final int SERVER = 2;
     static final int RECEIVER = 3;
+    static final int RECEIVERNAME = 4;
 
     //chuyen vi tri qua chessboardp2pscreenactivity
     static int newPos = -1;
+
+    static String namePlayer2;
 
     Handler hMain = new Handler(new Handler.Callback() {
         @Override
@@ -48,6 +51,8 @@ public class RoomActivity extends Activity {
                 case CLIENT:
                 {
                     txtWait.setText("SUCCESS");
+                    //gui ten nguoi choi client
+                    ((Client) clientThread).sendNamePlayer(MainActivity.namePlayer);
                     if (check1) {
                         check1 = false;
                         SorC = true;
@@ -72,6 +77,13 @@ public class RoomActivity extends Activity {
                     byte[] readBuffer = (byte[]) msg.obj;
                     String tempString = new String(readBuffer, 0, msg.arg1);
                     newPos = Integer.parseInt(tempString);
+                    break;
+                }
+                case RECEIVERNAME:
+                {
+                    byte[] readBuffer = (byte[]) msg.obj;
+                    String tempString = new String(readBuffer, 0, msg.arg1);
+                    namePlayer2 = "XO_" + tempString;
                     break;
                 }
             }
@@ -290,6 +302,7 @@ public class RoomActivity extends Activity {
                         unregisterReceiver(receiver);
                         isUnregister = true;
                     }
+                    namePlayer2 = deviceName.get(position);
 
                     listView.setVisibility(View.GONE);
                     txtWait.setText("WAITING...");
@@ -297,8 +310,10 @@ public class RoomActivity extends Activity {
                     lottieAnimationView.setVisibility(View.VISIBLE);
                     lottieAnimationView.playAnimation();
                     check1 = true;
+
                     clientThread = new Client(listDevice.get(position), hMain);
                     clientThread.start();
+
                     listDevice.clear();
                     deviceName.clear();
                 }
