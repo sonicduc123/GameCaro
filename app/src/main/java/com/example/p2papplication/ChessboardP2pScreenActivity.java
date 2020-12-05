@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,10 +20,13 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class ChessboardP2pScreenActivity extends Activity {
     int row = 15, col = 15;
@@ -365,12 +369,24 @@ public class ChessboardP2pScreenActivity extends Activity {
     //winner = 0 hoac 1 neu ban thang
     //winner = -1 neu doi thu thang
     private void openWinDialog(String message, final int winner) {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Notification");
-        builder.setMessage(message);
-        builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogTheme);
+        View view = LayoutInflater.from(ChessboardP2pScreenActivity.this).inflate(
+                R.layout.layout_warning_dialog,
+                (ConstraintLayout) findViewById(R.id.layoutDialogContainer)
+        );
+        builder.setView(view);
+        ((TextView) view.findViewById(R.id.textTitle)).setText("Notification");
+        ((TextView) view.findViewById(R.id.textMessage)).setText(message);
+        ((Button) view.findViewById(R.id.buttonNo)).setText("Home");
+        ((Button) view.findViewById(R.id.buttonYes)).setText("Continue");
+        ((ImageView) view.findViewById(R.id.imageIcon)).setImageResource(R.drawable.ic_baseline_notifications_24);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        view.findViewById(R.id.buttonYes).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface arg0, int arg1) {
+            public void onClick(View v) {
                 soundClick1.start();
                 if(winner == value) {
                     winPlayer1++;
@@ -399,23 +415,23 @@ public class ChessboardP2pScreenActivity extends Activity {
                 {
                     renewData(0);
                 }
+                alertDialog.dismiss();
             }
         });
 
-        builder.setNegativeButton("HOME", new DialogInterface.OnClickListener() {
+        view.findViewById(R.id.buttonNo).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface arg0, int arg1) {
+            public void onClick(View v) {
                 soundClick1.start();
                 Intent intent =new Intent(ChessboardP2pScreenActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
                 finish();
+                alertDialog.dismiss();
             }
         });
         builder.setCancelable(false);
-
-        AlertDialog dialog = builder.create();
-        dialog.show();
+        alertDialog.show();
     }
 
 
