@@ -237,7 +237,7 @@ public class RoomActivity extends Activity {
         //change name of bluetooth device
         String OldName = BA.getName();
         String namePlayer = MainActivity.namePlayer;
-        if (!OldName.equalsIgnoreCase("XO_" + namePlayer))
+        if (!OldName.equals("XO_" + namePlayer))
         {
             BA.setName("XO_" + namePlayer);
         }
