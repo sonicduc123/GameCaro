@@ -50,6 +50,8 @@ public class RoomActivity extends Activity {
             {
                 case CLIENT:
                 {
+                    lottieAnimationView.pauseAnimation();
+                    lottieAnimationView.setVisibility(View.GONE);
                     txtWait.setText("SUCCESS");
                     //gui ten nguoi choi client
                     ((Client) clientThread).sendNamePlayer(MainActivity.namePlayer);
@@ -63,6 +65,8 @@ public class RoomActivity extends Activity {
                 }
                 case SERVER:
                 {
+                    lottieAnimationView.pauseAnimation();
+                    lottieAnimationView.setVisibility(View.GONE);
                     txtWait.setText("SUCCESS");
                     if (check) {
                         check = false;
