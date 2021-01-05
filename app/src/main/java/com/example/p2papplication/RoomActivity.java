@@ -41,7 +41,7 @@ public class RoomActivity extends Activity {
     //chuyen vi tri qua chessboardp2pscreenactivity
     static int newPos = -1;
 
-    static String namePlayer2;
+    static String namePlayer2 ="XO_playername";
 
     Handler hMain = new Handler(new Handler.Callback() {
         @Override
@@ -80,6 +80,7 @@ public class RoomActivity extends Activity {
                 {
                     byte[] readBuffer = (byte[]) msg.obj;
                     String tempString = new String(readBuffer, 0, msg.arg1);
+
                     newPos = Integer.parseInt(tempString);
                     break;
                 }
@@ -159,9 +160,7 @@ public class RoomActivity extends Activity {
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("sdfsf","loi o day neddddd thg ngu 1");
                 if (!isUnregister) {
-                    Log.e("sdfsf","loi o day neddddd thg ngu 2");
 
                     deviceName.clear();
                     listDevice.clear();
@@ -170,16 +169,14 @@ public class RoomActivity extends Activity {
                     isUnregister = true;
                 }
 
-                Log.e("sdfsf","loi o day neddddd thg ngu 3");
 
                 txt3.setVisibility(View.GONE);
                 listView.setVisibility(View.GONE);
-                lottieAnimationView.setVisibility(View.VISIBLE);
                 lottieAnimationView.playAnimation();
+                lottieAnimationView.setVisibility(View.VISIBLE);
                 txtWait.setText("WAITING...");
                 txtWait.setVisibility(View.VISIBLE);
                 serverThread = new Server(hMain);
-                Log.e("sdfsf","loi o day neddddd thg ngu 4");
 
                 serverThread.start();
             }
@@ -271,7 +268,6 @@ public class RoomActivity extends Activity {
 
         txtWait.setVisibility(View.GONE);
         txt3.setVisibility(View.GONE);
-        lottieAnimationView.pauseAnimation();
         lottieAnimationView.setVisibility(View.GONE);
         listView.setVisibility(View.VISIBLE);
     }
@@ -337,6 +333,7 @@ public class RoomActivity extends Activity {
 
         //
 
+        newPos = -1;
         Intent intent = new Intent(this, ChessboardP2pScreenActivity.class);
 
         Bundle bundle = new Bundle();

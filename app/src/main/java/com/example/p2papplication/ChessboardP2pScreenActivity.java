@@ -42,7 +42,7 @@ public class ChessboardP2pScreenActivity extends Activity {
     boolean check = true;
 
     TextView namePlayer;
-    TextView namePlayer2;
+    TextView namePlayer1;
 
     Button btnMusic;
     Button btnRedo;
@@ -82,8 +82,8 @@ public class ChessboardP2pScreenActivity extends Activity {
         namePlayer = (TextView) findViewById(R.id.namePlayer);
         namePlayer.setText("Player1: " + MainActivity.namePlayer);
 
-        namePlayer2 = (TextView) findViewById(R.id.namePlayer2);
-        namePlayer2.setText("Player2: " + RoomActivity.namePlayer2.substring(3));
+        namePlayer1 = (TextView) findViewById(R.id.namePlayer2);
+        namePlayer1.setText("Player2: " + RoomActivity.namePlayer2.substring(3));
 
         btnBackground = (Button) findViewById(R.id.btnBackground);
         btnHome = (Button) findViewById(R.id.btnHome);
@@ -195,7 +195,17 @@ public class ChessboardP2pScreenActivity extends Activity {
             public void onClick(View v) {
                 soundClick1.start();
                 btnHome.startAnimation(scaleUp);
+                //gui tn out tran cho may khac
+                Log.e("me","P1: Tao out");
+                if(intClient == 0) {
+                    ((Client) RoomActivity.clientThread).sendMsg(-10);
+                }
+                else
+                    ((Server) RoomActivity.serverThread).sendMsg(-10);
+
+
                 Intent intent = new Intent(ChessboardP2pScreenActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 btnHome.startAnimation(scaleDown);
                 startActivity(intent);
                 onDestroy();
@@ -388,6 +398,10 @@ public class ChessboardP2pScreenActivity extends Activity {
         ((TextView) view.findViewById(R.id.textMessage)).setText(message);
         ((Button) view.findViewById(R.id.buttonNo)).setText("Home");
         ((Button) view.findViewById(R.id.buttonYes)).setText("Continue");
+        if (winner ==-10)
+        {
+            view.findViewById(R.id.buttonYes).setVisibility(view.GONE);
+        }
         ((ImageView) view.findViewById(R.id.imageIcon)).setImageResource(R.drawable.ic_baseline_notifications_24);
 
         final AlertDialog alertDialog = builder.create();
@@ -432,6 +446,16 @@ public class ChessboardP2pScreenActivity extends Activity {
             @Override
             public void onClick(View v) {
                 soundClick1.start();
+                if (winner != -10){ //kiem tra doi thu thoat giua tran?
+                    //gui tn out tran cho may khac
+                    if(intClient == 0) {
+                        ((Client) RoomActivity.clientThread).sendMsg(-10);
+                    }
+                    else
+                        ((Server) RoomActivity.serverThread).sendMsg(-10);
+                }
+
+
                 Intent intent =new Intent(ChessboardP2pScreenActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
@@ -539,6 +563,11 @@ public class ChessboardP2pScreenActivity extends Activity {
                 int newPosition = RoomActivity.newPos;
 
                 Log.e("yors","P2: " + newPosition);
+                if(newPosition==-10)
+                {
+                    openWinDialog("Your friend is quit the room", -10);
+                    return;
+                }
                 if ( newPosition >=0 ){
                     if (list[newPosition / col][newPosition % col] == 0 ) {
                         check = true;

@@ -66,4 +66,12 @@ public class P2p extends Thread{
             e.printStackTrace();
         }
     }
+
+    public void cancel(){
+        try{
+            bluetoothSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+    }
+    }
 }
