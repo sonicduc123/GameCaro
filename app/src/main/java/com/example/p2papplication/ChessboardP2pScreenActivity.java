@@ -188,6 +188,13 @@ public class ChessboardP2pScreenActivity extends Activity {
             }
         });
 
+        btnRedo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ChessboardP2pScreenActivity.this, "Hien chua thuc hien chuc nang nay ", Toast.LENGTH_LONG).show();
+            }
+        });
+
 
         btnHome.setOnClickListener(new View.OnClickListener() {
 

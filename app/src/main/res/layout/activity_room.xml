@@ -101,6 +101,7 @@
         android:visibility="invisible"
         android:text="WAITING...."
         android:id="@+id/txtWait"
+        android:textAlignment="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:layout_marginBottom="30dp"

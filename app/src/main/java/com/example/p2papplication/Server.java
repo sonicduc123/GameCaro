@@ -38,6 +38,7 @@ public class Server extends Thread{
                     MY_UUID);
         } catch (IOException e) {
             Log.e(TAG, "Socket's listen() method failed", e);
+
         }
         mmServerSocket = temp;
     }
@@ -56,6 +57,10 @@ public class Server extends Thread{
                 socket = mmServerSocket.accept();
             } catch (IOException e) {
                 Log.e(TAG, "Socket's accept() method failed", e);
+                Message m = Message.obtain(); //get null message
+                m.what = 0;//Error
+                //use the handler to send message
+                hServer.sendMessage(m);
                 break;
             }
 

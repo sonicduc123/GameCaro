@@ -33,6 +33,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import java.util.ArrayList;
 
 public class RoomActivity extends Activity {
+    static final int ERROR = 0;
     static final int CLIENT = 1;
     static final int SERVER = 2;
     static final int RECEIVER = 3;
@@ -48,6 +49,14 @@ public class RoomActivity extends Activity {
         public boolean handleMessage(@NonNull Message msg) {
             switch (msg.what)
             {
+                case ERROR:
+                {
+                    lottieAnimationView.pauseAnimation();
+                    lottieAnimationView.setVisibility(View.GONE);
+                    txtWait.setText("FAILED CONNECTION" +
+                            "\nPlease Try Agian");
+                    break;
+                }
                 case CLIENT:
                 {
                     lottieAnimationView.pauseAnimation();

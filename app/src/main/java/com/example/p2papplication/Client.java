@@ -31,6 +31,7 @@ public class Client extends Thread{
             tmp = device.createRfcommSocketToServiceRecord(MY_UUID);
         } catch (IOException e) {
             Log.e(TAG, "Socket's create() method failed", e);
+
         }
         mmSocket = tmp;
 
@@ -52,6 +53,10 @@ public class Client extends Thread{
             cTos = new P2p(mmSocket, hClient);
             cTos.start();
         } catch (IOException connectException) {
+            Message m = Message.obtain(); //get null message
+            m.what = 0;//Error
+            //use the handler to send message
+            hClient.sendMessage(m);
             // Unable to connect; close the socket and return.
             try {
                 mmSocket.close();
